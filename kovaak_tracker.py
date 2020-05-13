@@ -91,7 +91,7 @@ def parse_stats_folder():
             chal_stats = parse_stats_file(os.path.join(directory, filename.encode("UTF-8")).decode("UTF-8"))
             stats = stats.append(pd.DataFrame([[chal, date + "-" + time] + chal_stats.to_numpy().tolist()[0]], columns = ["challenge", "timestamp", "score", "kills", "damage", "shots", "hits", "accuracy", "ttk_per", "ttk_between", "efficiency"]))
             i += 1
-        #if i > 669:
+        #if i > 60:
         #    break
 
     stats["timestamp"] = pd.to_datetime(stats["timestamp"], format="%Y.%m.%d-%H.%M.%S")
@@ -107,7 +107,7 @@ def normalize_by_group(df, by):
     # then auto broadcasts to size of group chunk
     minimum = groups.min()
     maximum = groups.max()
-    return (df-minimum)/(maximum-minimum)
+    return (df)/(maximum)
 
 def setup_dashboard(app, stats):
     # Setup stats
